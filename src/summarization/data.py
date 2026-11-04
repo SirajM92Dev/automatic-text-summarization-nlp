@@ -35,7 +35,11 @@ def load_local_records(path: str | Path) -> list[dict[str, str]]:
         with source.open(newline="", encoding="utf-8") as handle:
             raw_records = list(csv.DictReader(handle))
     elif source.suffix.lower() == ".jsonl":
-        raw_records = [json.loads(line) for line in source.read_text(encoding="utf-8").splitlines() if line.strip()]
+        raw_records = [
+            json.loads(line)
+            for line in source.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
     elif source.suffix.lower() == ".json":
         payload = json.loads(source.read_text(encoding="utf-8"))
         raw_records = payload if isinstance(payload, list) else payload.get("data", [])

@@ -22,7 +22,9 @@ def score_summaries(predictions: list[str], references: list[str]) -> dict[str, 
     return {metric: {"f1": sum(values) / len(values)} for metric, values in totals.items()}
 
 
-def write_artifacts(records: list[dict[str, Any]], metrics: dict[str, Any], output_dir: str | Path) -> None:
+def write_artifacts(
+    records: list[dict[str, Any]], metrics: dict[str, Any], output_dir: str | Path
+) -> None:
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
     (destination / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")

@@ -37,7 +37,10 @@ class AbstractiveSummarizer:
     def summarize(self, text: str) -> str:
         if not text.strip():
             raise ValueError("Cannot summarize an empty document.")
-        prompt = text if self.config.model_name.lower().startswith(("facebook/bart", "google/pegasus")) else f"summarize: {text}"
+        is_instruction_model = self.config.model_name.lower().startswith(
+            ("facebook/bart", "google/pegasus")
+        )
+        prompt = text if is_instruction_model else f"summarize: {text}"
         result = self._get_pipeline()(
             prompt,
             truncation=True,

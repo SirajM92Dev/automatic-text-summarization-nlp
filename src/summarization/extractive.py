@@ -11,7 +11,11 @@ SENTENCE_PATTERN = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"'])")
 
 
 def split_sentences(text: str) -> list[str]:
-    return [sentence.strip() for sentence in SENTENCE_PATTERN.split(text.strip()) if sentence.strip()]
+    return [
+        sentence.strip()
+        for sentence in SENTENCE_PATTERN.split(text.strip())
+        if sentence.strip()
+    ]
 
 
 class ExtractiveSummarizer:

@@ -12,7 +12,9 @@ from .pipeline import compare_records
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Compare extractive and abstractive summarization.")
+    parser = argparse.ArgumentParser(
+        description="Compare extractive and abstractive summarization."
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
     for name in ("extractive", "abstractive"):
         sub = subparsers.add_parser(name)
@@ -51,7 +53,9 @@ def main() -> None:
         print(json.dumps({"extractive": extractive, "abstractive": abstractive}, indent=2))
     else:
         records = load_records(args.dataset, args.split, args.input, args.max_examples)
-        result = compare_records(records, args.model, args.max_sentences, output_dir=args.output_dir)
+        result = compare_records(
+            records, args.model, args.max_sentences, output_dir=args.output_dir
+        )
         print(json.dumps(result["metrics"], indent=2))
 
 

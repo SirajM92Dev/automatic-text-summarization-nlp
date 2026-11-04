@@ -33,8 +33,12 @@ def compare_records(
     metrics: dict[str, Any] = {}
     if all(references):
         metrics = {
-            "extractive": score_summaries([row["extractive_summary"] for row in examples], references),
-            "abstractive": score_summaries([row["abstractive_summary"] for row in examples], references),
+            "extractive": score_summaries(
+                [row["extractive_summary"] for row in examples], references
+            ),
+            "abstractive": score_summaries(
+                [row["abstractive_summary"] for row in examples], references
+            ),
         }
     if output_dir:
         write_artifacts(examples, metrics, output_dir)
